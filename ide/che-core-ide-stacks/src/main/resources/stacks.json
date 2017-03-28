@@ -590,7 +590,7 @@
     "id": "php-default",
     "creator": "ide",
     "name": "PHP",
-    "description": "Default PHP Stack with PHP 5.6, most popular extensions and dockerimager.",
+    "description": "Default PHP Stack with PHP 7.0, most popular extensions.",
     "scope": "general",
     "tags": [
       "Ubuntu",
@@ -604,7 +604,7 @@
     "components": [
       {
         "name": "PHP",
-        "version": "5.6.24"
+        "version": "7.0"
       },
       {
         "name": "Apache",
@@ -2136,6 +2136,82 @@
     "stackIcon": {
         "name": "type-java.svg",
         "mediaType": "image/svg+xml"
+    }
+  },
+  {
+    "id": "spring-boot",
+    "creator": "Gytis Trikleris",
+    "name": "Spring Boot",
+    "description": "Spring Boot Stack on CentOS.",
+    "scope": "advanced",
+    "tags": [
+      "Java",
+      "JDK",
+      "Maven",
+      "Spring Boot",
+      "CentOS",
+      "Git"
+    ],
+    "components": [
+      {
+        "name": "CentOS",
+        "version": "---"
+      },
+      {
+        "name": "JDK",
+        "version": "1.8.0"
+      },
+      {
+        "name": "Maven",
+        "version": "3.3"
+      }
+    ],
+    "source": {
+      "type": "image",
+      "origin": "registry.centos.org/che-stacks/spring-boot"
+    },
+    "workspaceConfig": {
+      "name": "default",
+      "defaultEnv": "default",
+      "environments": {
+        "default": {
+          "recipe": {
+            "location": "registry.centos.org/che-stacks/spring-boot",
+            "type": "dockerimage"
+          },
+          "machines": {
+            "dev-machine": {
+              "agents": [
+                "org.eclipse.che.terminal",
+                "org.eclipse.che.ws-agent",
+                "org.eclipse.che.ssh"
+              ],
+              "attributes": {
+                "memoryLimitBytes": "2147483648"
+              }
+            }
+          }
+        }
+      },
+      "commands": [
+        {
+          "commandLine": "scl enable rh-maven33 'mvn clean install -f ${current.project.path}'",
+          "name": "build",
+          "type": "custom"
+        },
+        {
+          "commandLine": "java -jar ${current.project.path}/target/*.jar",
+          "name": "run",
+          "type": "custom",
+          "attributes": {
+            "previewUrl": "http://${server.port.8080}"
+          }
+        }
+      ]
+    },
+    "stackIcon": {
+      "name": "type-spring-boot.svg",
+      "mediaType": "image/svg+xml"
     }
   }
 ]
