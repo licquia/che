@@ -26,18 +26,13 @@ public class WsAgentAnalyticsAddresser {
 
     private static final Logger LOG = LoggerFactory.getLogger(WsAgentAnalyticsAddresser.class);
 
-    public final String id;
-
-    public WsAgentAnalyticsAddresser(String prefix) {
-        id = NameGenerator.generate(prefix, 10);
-    }
-
+    public static final String ID = NameGenerator.generate("CHA", 10);
 
     @ScheduleRate(period = 1, unit = TimeUnit.HOURS)
     void send() {
         HttpURLConnection connection = null;
         try {
-            final URL url = new URL("https://install.codenvycorp.com/che/init/workspace?id=" + id);
+            final URL url = new URL("https://install.codenvycorp.com/che/init/workspace?id=" + ID);
             connection = (HttpsURLConnection)url.openConnection();
             connection.getResponseCode();
         } catch (Exception e) {
