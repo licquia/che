@@ -14,12 +14,7 @@ import com.google.gson.JsonParser;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
-import com.google.inject.name.Names;
 
-import org.eclipse.che.ApiEndpointAccessibilityChecker;
-import org.eclipse.che.EventBusURLProvider;
-import org.eclipse.che.UriApiEndpointProvider;
-import org.eclipse.che.UserTokenProvider;
 import org.eclipse.che.api.auth.oauth.OAuthTokenProvider;
 import org.eclipse.che.api.core.jsonrpc.BuildingRequestTransmitter;
 import org.eclipse.che.api.core.jsonrpc.JsonRpcFactory;
@@ -36,10 +31,12 @@ import org.eclipse.che.security.oauth.RemoteOAuthTokenProvider;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
-import java.net.URI;
 
 /**
+ * Mandatory modules of workspace agent
+ *
  * @author Evgen Vidolob
+ * @author Sergii Kabashniuk
  */
 @DynaModule
 public class WsAgentModule extends AbstractModule {
@@ -56,20 +53,6 @@ public class WsAgentModule extends AbstractModule {
         install(new org.eclipse.che.api.debugger.server.DebuggerModule());
         install(new org.eclipse.che.api.git.GitModule());
         install(new org.eclipse.che.git.impl.jgit.JGitModule());
-
-
-
-
-
-        bind(URI.class).annotatedWith(Names.named("che.api")).toProvider(UriApiEndpointProvider.class);
-        bind(String.class).annotatedWith(Names.named("user.token")).toProvider(UserTokenProvider.class);
-
-        bind(String.class).annotatedWith(Names.named("event.bus.url")).toProvider(EventBusURLProvider.class);
-        bind(ApiEndpointAccessibilityChecker.class);
-        bind(WsAgentAnalyticsAddresser.class);
-
-        bind(String.class).annotatedWith(Names.named("wsagent.endpoint"))
-                          .toProvider(WsAgentURLProvider.class);
 
         configureJsonRpc();
         configureWebSocket();
