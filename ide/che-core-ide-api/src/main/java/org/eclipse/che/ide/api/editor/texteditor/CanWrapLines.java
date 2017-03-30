@@ -8,12 +8,25 @@
  * Contributors:
  *   Codenvy, S.A. - initial API and implementation
  *******************************************************************************/
-package org.eclipse.che.ide.ui.menubutton;
+package org.eclipse.che.ide.api.editor.texteditor;
 
-/** Item for {@link MenuPopupButton}. */
-public interface PopupItem {
+/**
+ * Determined whether the editor implementing this interface can wrap lines.
+ *
+ * @author Vitaliy Guliy
+ */
+public interface CanWrapLines {
 
-    String getName();
+    /**
+     * Determines whether line wrapping is active.
+     *
+     * @return <b>true</b> when line wrapping is active
+     */
+    boolean isWrapLines();
 
-    boolean isDisabled();
+    /**
+     * Toggles line wrapping mode.
+     */
+    void toggleWrapLines();
+
 }
