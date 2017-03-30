@@ -67,9 +67,9 @@
                                 </copy>
                                 <copy todir="${project.build.directory}/go-workspace/src/github.com/eclipse/che/agents/go-agents">
                                     <fileset dir="${basedir}/../go-agents/">
-                                        <exclude name="vendor/"/>
-                                        <exclude name="target/"/>
-                                        <include name="**/*.*go"/>
+                                        <exclude name="vendor/" />
+                                        <exclude name="target/" />
+                                        <include name="**/*.*go" />
                                     </fileset>
                                 </copy>
                             </target>
