@@ -17,6 +17,7 @@ import org.eclipse.che.ApiEndpointAccessibilityChecker;
 import org.eclipse.che.EventBusURLProvider;
 import org.eclipse.che.UriApiEndpointProvider;
 import org.eclipse.che.UserTokenProvider;
+import org.eclipse.che.inject.DynaModule;
 
 import java.net.URI;
 
@@ -25,6 +26,7 @@ import java.net.URI;
  *
  * @author Sergii Kabashniuk
  */
+@DynaModule
 public class CheWsAgentModule extends AbstractModule {
     @Override
     protected void configure() {
